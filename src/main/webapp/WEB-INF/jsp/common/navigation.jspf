@@ -1,0 +1,62 @@
+
+<nav role="navigation" class="navbar navbar-inverse">
+	<div class="active">
+		<a href="/welcome" class="navbar-brand">Home</a>
+	</div>
+	<div class="navbar-collapse">
+		<ul class="nav navbar-nav">
+			<sec:authorize
+				access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_EDITUSER')">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Dyn Admin Operations <span
+						class="navbar-inverse"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/cacheInvalidation">Cache Invalidation</a></li>
+						<li><a href="/methodInvocator">Method Invocation</a></li>
+						<li><a href="/componentValueSetter">Component Value Setter</a></li>
+						<li><a href="/componentReportBuilder">Component Value Report</a></li>
+						<li><a href="/serverStatusDashboard">Servers Status Dashbord</a></li>
+					</ul></li>
+			</sec:authorize>
+			<sec:authorize
+				access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_EDITUSER')">	
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Database Operations<span
+						class="navbar-inverse"></span></a>
+					<ul class="dropdown-menu">
+					<sec:authorize
+						access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_EDITUSER')">
+						<li><a href="/dbQueryPanel">Database Query Panel</a></li>
+					</sec:authorize>	
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a href="/schemaConfigMngt">Schema Config Management</a></li>
+					</sec:authorize>
+					
+					</ul>
+				</li>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<li><a href="/list-users">Users</a></li>
+			</sec:authorize>
+		</ul>
+		<sec:authorize
+			access="hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_EDITUSER')">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"><span
+						class="glyphicon glyphicon-user">&nbsp;<%=session.getAttribute("fullName")%>!</span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/reset-password"><span
+						class="glyphicon "></span>Change Password</a></li>
+						<li><a href="/modify-user"><span
+						class="glyphicon "></span>Modify Profile</a></li>
+						<li><a href="/logout"><span
+						class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+						
+					</ul>	
+				</li>
+				
+			</ul>
+		</sec:authorize>
+	</div>
+</nav>

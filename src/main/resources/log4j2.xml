@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+
+
+	<Properties>
+		<Property name="path">logs</Property>
+	</Properties>
+
+	<RollingFile name="roll-appLog-by-size" fileName="${path}/app.log"
+		filePattern="${path}/app.%i.log.gz" ignoreExceptions="false">
+		<PatternLayout>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+		</PatternLayout>
+		<Policies>
+			<OnStartupTriggeringPolicy />
+			<SizeBasedTriggeringPolicy size="5000 KB" />
+		</Policies>
+	</RollingFile>
+	
+	<Appenders>
+		<Console name="Console-Appender" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+				>
+			</PatternLayout>
+		</Console>
+		<File name="App-Appender" fileName="${path}/app_log.log">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+		</File>
+		<File name="SpringBoot-Appender" fileName="${path}/springboot_log.log">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+		</File>
+	</Appenders>
+
+	<Loggers>
+		<!-- Log everything in custom package -->
+		<Logger name="org.iqra.operationsapp" level="debug" additivity="true">
+			<AppenderRef ref="Console-Appender" />
+			<AppenderRef ref="App-Appender" />
+		</Logger>
+
+		<!-- Log everything in Spring Boot -->
+		<Logger name="org.springframework.boot" level="debug"
+			additivity="true">
+			<AppenderRef ref="Console-Appender" />
+			<AppenderRef ref="SpringBoot-Appender" />
+		</Logger>
+
+		<!-- Log everything in Spring Core -->
+		<Logger name="org.springframework.core" level="debug"
+			additivity="true">
+			<AppenderRef ref="Console-Appender" />
+			<AppenderRef ref="SpringBoot-Appender" />
+		</Logger>
+
+		<!-- Log everything in Spring Core -->
+		<Logger name="org.springframework.security" level="debug"
+			additivity="true">
+			<AppenderRef ref="Console-Appender" />
+			<AppenderRef ref="SpringBoot-Appender" />
+		</Logger>
+
+		<Root level="error">
+			<AppenderRef ref="Console-Appender" />
+			<AppenderRef ref="SpringBoot-Appender" />
+			
+		</Root>
+
+	</Loggers>
+</Configuration>
