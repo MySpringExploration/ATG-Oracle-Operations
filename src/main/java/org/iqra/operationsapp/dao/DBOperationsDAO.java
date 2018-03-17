@@ -15,7 +15,6 @@ import org.iqra.operationsapp.entity.DBOperations;
 public interface DBOperationsDAO {
 	public DBOperations executeQuery(String dbQuery);
 	public boolean executeDDL(String dbQuery);
-	public int executeDML(String dbQuery);
 	public void insert(Customer customer);
 	
 }

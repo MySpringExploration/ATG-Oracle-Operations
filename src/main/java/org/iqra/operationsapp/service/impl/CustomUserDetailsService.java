@@ -5,7 +5,11 @@ import java.util.Collection;
 
 import org.iqra.operationsapp.dao.UserInfoDAO;
 import org.iqra.operationsapp.entity.UserInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,15 +21,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-	@Autowired
-	private UserInfoDAO userInfoDAO;
-
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	
 	@Override
 	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+		
+		logger.debug("Begin : CustomUserDetailsService --> loadUserByUsername() --> ");
+		ApplicationContext context =
+				new ClassPathXmlApplicationContext("Spring-Module.xml");
+		
+		UserInfoDAO userInfoDAO = (UserInfoDAO)context.getBean("userInfoDAO");
 		UserInfo activeUserInfo = userInfoDAO.getActiveUser(loginId);
 		GrantedAuthority authority = new SimpleGrantedAuthority(activeUserInfo.getRole());
 		UserDetails userDetails = (UserDetails) new User(activeUserInfo.getLoginId(), activeUserInfo.getPassword(),
 				Arrays.asList(authority));
+		logger.debug("CustomUserDetailsService --> loadUserByUsername() --> "+userDetails);
+		logger.debug("End : CustomUserDetailsService --> loadUserByUsername() --> ");
 		return userDetails;
 	}
 

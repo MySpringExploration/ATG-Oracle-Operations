@@ -13,8 +13,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 22-Feb-2018
  * 
  */
-public interface UserInfoRepository extends JpaRepository<UserInfo, Integer>{
-	
+public interface UserInfoRepository //extends JpaRepository<UserInfo, Integer>{
+{	
 	List<UserInfo> findByEnabled(short enabled);
 	
 	List<UserInfo> deleteByLoginId(String loginId);

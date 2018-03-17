@@ -51,7 +51,7 @@ function loadImages() {
 	onImages[5].src  = './pics/import2.jpg';
 	onImages[6].src  = './pics/insert2.jpg';
 	onImages[7].src  = './pics/export2.jpg';
-	onImages[8].src  = './pics/operations2.jpg';
+	onImages[8].src  = './pics2.jpg';
 	onImages[9].src  = './pics/search2.jpg';
 	onImages[10].src = './pics/login2.jpg';
 	onImages[11].src = './pics/reset2.jpg';
@@ -76,7 +76,7 @@ function loadImages() {
 	offImages[5].src  = './pics/import1.jpg';
 	offImages[6].src  = './pics/insert1.jpg';
 	offImages[7].src  = './pics/export1.jpg';
-	offImages[8].src  = './pics/operations1.jpg';
+	offImages[8].src  = './pics1.jpg';
 	offImages[9].src  = './pics/search1.jpg';
 	offImages[10].src = './pics/login1.jpg';
 	offImages[11].src = './pics/reset1.jpg';

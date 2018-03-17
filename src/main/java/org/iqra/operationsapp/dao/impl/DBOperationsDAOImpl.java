@@ -301,9 +301,6 @@ public class DBOperationsDAOImpl implements DBOperationsDAO {
 		return false;
 	}
 
-	public int executeDML(String dbQuery) {
-
-		return 0;
-	}
+	
 
 }

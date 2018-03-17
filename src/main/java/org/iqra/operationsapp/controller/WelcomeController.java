@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.iqra.operationsapp.entity.UserInfo;
 import org.iqra.operationsapp.helper.PopulateDetailsHelper;
 import org.iqra.operationsapp.repo.UserInfoRepository;
+import org.iqra.operationsapp.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,18 +23,17 @@ public class WelcomeController {
 	private PopulateDetailsHelper populateDetailsHelper;
 	
 	@Autowired
-	UserInfoRepository repository;
+	private UserInfoService userInfoService;
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String showWelcomePage(HttpServletRequest request, ModelMap model) {
-		
 		
 		String loginId = populateDetailsHelper.getLoggedInUserName();
 		model.put("comingSoonFeaturesLabel", populateDetailsHelper.getComingSoonFeaturesLabel());
 		model.put("comingSoonFeaturesList", populateDetailsHelper.getComingSoonFeaturesList());
 		model.put("futureFeaturesLabel", populateDetailsHelper.getFutureFeaturesLabel());
 		model.put("futureFeaturesList", populateDetailsHelper.getFutureFeaturesList());
-		UserInfo userInfo = repository.findByLoginId(loginId);
+		UserInfo userInfo = userInfoService.findByLoginId(loginId);
 		request.getSession().setAttribute("fullName", userInfo.getFullName());
 		request.getSession().setAttribute("loginId", loginId);
 		return "welcome";

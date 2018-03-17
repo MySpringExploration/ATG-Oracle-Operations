@@ -28,18 +28,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class DBOperationsController {
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private DBOperationsService dbOperatoinsService;
 	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
 	@RequestMapping(value = "/dbQueryPanel", method = RequestMethod.GET)
 	public String showDBQueryPanelPage(HttpServletRequest request, ModelMap model) {
-		logger.debug("Begin : DynAdminController --> /dbQueryPanel --> GET");
+		logger.debug("Begin : DBOperationsController --> /dbQueryPanel --> GET");
 
 		model.addAttribute("dBOperations", new DBOperations());
 		
-		logger.debug("End : DynAdminController --> /dbQueryPanel --> GET");
+		logger.debug("End : DBOperationsController --> /dbQueryPanel --> GET");
 		return "db-operations/dbquery-operations";
 	}
 
@@ -47,7 +47,7 @@ public class DBOperationsController {
 	public String showDBQueryResultsPage(ModelMap model, @Valid DBOperations dBOperations, BindingResult result,
 			HttpServletRequest request) {
 		
-		logger.debug("Begin : DynAdminController --> /dbQueryPanel --> POST");
+		logger.debug("Begin : DBOperationsController --> /dbQueryPanel --> POST");
 		
 		if (result.hasErrors()) {
 			model.addAttribute("exceptionMsg", result.getErrorCount());
@@ -101,7 +101,7 @@ public class DBOperationsController {
 			model.addAttribute("dBOperations", dBOperationsResult);
 		}
 		
-		logger.debug("End : DynAdminController --> /dbQueryPanel --> POST");
+		logger.debug("End : DBOperationsController --> /dbQueryPanel --> POST");
 		
 		return "db-operations/dbquery-operations";
 	}
@@ -110,13 +110,13 @@ public class DBOperationsController {
 	public ModelAndView exportDBQueryResultsPage(ModelMap model, @Valid DBOperations dBOperations, BindingResult result,
 			HttpServletRequest request) {
 		
-		logger.debug("Begin : DynAdminController --> /export --> GET");
+		logger.debug("Begin : DBOperationsController --> /export --> GET");
 		String format = request.getParameter("format");
 		String dbQuery = request.getSession().getAttribute("dbQuery").toString();
 		DBOperations dBOperationsResult = dbOperatoinsService.executeQuery(dbQuery);
 		dBOperationsResult.setDbQuery(dbQuery);
 		
-		logger.debug("End : DynAdminController --> /export --> GET");
+		logger.debug("End : DBOperationsController --> /export --> GET");
 		if(format != null && format.equals("ToExcel")){
 			   return new ModelAndView(new ExcelView(), "dBOperations", dBOperationsResult);
 		} else if(format != null && format.equals("ToPDF")){

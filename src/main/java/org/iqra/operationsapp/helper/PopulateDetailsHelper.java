@@ -20,7 +20,28 @@ public class PopulateDetailsHelper {
 
 	@Autowired
 	private ATGApplicationsProps aTGApplicationsProps;
+	
+	@Value("${spring.datasource.url}")
+	private String jDBCUrl;
 
+	public String getUserName() {
+		return userName;
+	}
+	
+	@Value("${spring.datasource.enusername}")
+	private String userName;
+	
+	public String getjDBCUrl() {
+		return jDBCUrl;
+	}
+
+	@Value("${spring.datasource.enpassword}")
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+	
 	@Value("${features.comingsoon.label}")
 	private String comingSoonFeaturesLabel;
 

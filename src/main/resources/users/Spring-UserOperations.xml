@@ -3,11 +3,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="dbOperationsDAO" class="org.iqra.operationsapp.dao.impl.DBOperationsDAOImpl">
+	<bean id="userInfoDAO" class="org.iqra.operationsapp.dao.impl.UserInfoDAOImpl">
 		<property name="dataSource" ref="dataSource" />
-		<property name="tableMetaData" ref="tableMetadata" />
-		<property name="allRowsData" ref="allRowsData" />
-		<property name="dBOperations" ref="dBOperations" />
+		
 	</bean>
 	
 </beans>

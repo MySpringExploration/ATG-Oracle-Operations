@@ -2,8 +2,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-
+	<bean id="propertyPlaceholderConfigurer" class="org.iqra.operationsapp.security.EncryptedPropertyPlacementConfigurer">
+        <property name="location" value="classpath:/application.properties" />
+        <property name="ignoreResourceNotFound" value="true" />
+    </bean>
 	<import resource="database/Spring-Datasource.xml" />
 	<import resource="database/Spring-Customer.xml" />
 	<import resource="database/Spring-DBOperations.xml" />
+	<import resource="users/Spring-UserOperations.xml" />
+	<import resource="users/Spring-Datasource.xml" />
 </beans>

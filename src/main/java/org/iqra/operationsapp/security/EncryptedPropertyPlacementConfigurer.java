@@ -15,6 +15,8 @@ import javax.crypto.spec.PBEParameterSpec;
 import org.springframework.util.StringUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 
 /**
@@ -22,9 +24,11 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
  * 13-Mar-2018
  * 
  */
+
 public class EncryptedPropertyPlacementConfigurer extends PropertyPlaceholderConfigurer
 {
-    /** algorithm used for encrpytion and decryption */
+   
+	/** algorithm used for encrpytion and decryption */
     private static final String ALGORITHM = "PBEWithMD5AndDES";
 
     /** 8-byte Salt. */
@@ -101,4 +105,7 @@ public class EncryptedPropertyPlacementConfigurer extends PropertyPlaceholderCon
         }
         return super.convertPropertyValue(originalValue);
     }
+    
+    
+   
 }

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.iqra.operationsapp.entity.UserInfo;
 import org.iqra.operationsapp.helper.PopulateDetailsHelper;
 import org.iqra.operationsapp.repo.UserInfoRepository;
+import org.iqra.operationsapp.service.UserInfoService;
 import org.iqra.operationsapp.util.BCryptEncoderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RegisterController {
 	
+	//@Autowired
+	//UserInfoRepository repository;
+	
 	@Autowired
-	UserInfoRepository repository;
+	private UserInfoService userInfoService;
 	
 	@Autowired
 	BCryptEncoderUtil encoder;
@@ -51,9 +55,13 @@ public class RegisterController {
 			return "register";
 		}
 		userInfo.setPassword(encoder.encrypt(userInfo.getPassword()));
-		repository.save(userInfo);
-		model.addAttribute("successMsg", "Congratulations!! Registration Successful.<br>" + 
-				"	An email will be sent to you once approved by Admin.");
+		//repository.save(userInfo);
+		boolean status = userInfoService.addUser(userInfo);
+		if(status) {
+			model.addAttribute("successMsg", "Congratulations!! Registration Successful.<br>" + 
+					"	An email will be sent to you once approved by Admin.");
+		}
+		
 		return "user-success";
 	}
 	

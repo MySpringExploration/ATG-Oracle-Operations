@@ -12,13 +12,4 @@
 		<property name="password" value="${spring.datasource.enpassword}" />
 	</bean>
 	
-	<bean id="tableMetadata"
-		class="org.iqra.operationsapp.entity.TableMetaData"></bean>
-	
-	<bean id="allRowsData"
-		class="org.iqra.operationsapp.entity.AllRowsData"></bean>
-	
-	<bean id="dBOperations"
-		class="org.iqra.operationsapp.entity.DBOperations"></bean>
-
 </beans>
